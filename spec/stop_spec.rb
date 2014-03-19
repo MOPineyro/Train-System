@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Stop do
+  #### TEST LINES / STATIONS ####
+  Station.create('42nd St')
+  Station.create('Houston')
+
+  Line.create('red')
+  Line.create('yellow')
+  ###############################
+
   describe '#initialize' do
     it 'creates an instance of Stop' do
       test_stop = Stop.new({:station_id =>3, :line_id => 6})
@@ -17,15 +25,29 @@ describe Stop do
 
   describe '.create' do
     it 'creates a Stop object' do
-      test_stop = Stop.create(1,3)
+      #### TEST LINES / STATIONS ####
+      Station.create('42nd St')
+      Station.create('Houston')
+
+      Line.create('red')
+      Line.create('yellow')
+      ###############################
+      test_stop = Stop.create('42nd St','yellow')
       test_stop.should be_an_instance_of Stop
     end
   end
 
   describe '#delete' do
     it 'removes a stop from class.all and the database' do
-      test_stop1 = Stop.create(8,5)
-      test_stop2 = Stop.create(5,5)
+      #### TEST LINES / STATIONS ####
+      Station.create('42nd St')
+      Station.create('Houston')
+
+      Line.create('red')
+      Line.create('yellow')
+      ###############################
+      test_stop1 = Stop.create('Houston','yellow')
+      test_stop2 = Stop.create('42nd St','red')
       test_stop2.delete
       Stop.all.should eq [test_stop1]
     end
@@ -33,7 +55,14 @@ describe Stop do
 
   describe '#save' do
     it 'saves a stop to the class' do
-      test_stop = Stop.create(4,5)
+      #### TEST LINES / STATIONS ####
+      Station.create('42nd St')
+      Station.create('Houston')
+
+      Line.create('red')
+      Line.create('yellow')
+      ###############################
+      test_stop = Stop.create('Houston','red')
       Stop.all.should eq [test_stop]
     end
   end

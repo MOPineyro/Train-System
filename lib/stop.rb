@@ -20,7 +20,11 @@ class Stop
     stops
   end
 
-  def self.create(station_id, line_id)
+  def self.create(station_name, line_color)
+    result_station_id = DB.exec("SELECT id FROM stations WHERE name = '#{station_name}';")
+    station_id = result_station_id.first['id'].to_i
+    result_line_id = DB.exec("SELECT id FROM lines WHERE color = '#{line_color}';")
+    line_id = result_line_id.first['id'].to_i
     new_stop = Stop.new({:station_id => station_id, :line_id => line_id})
     new_stop.save
     new_stop

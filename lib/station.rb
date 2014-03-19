@@ -24,6 +24,11 @@ class Station
     new_station
   end
 
+  def update(updated_name)
+    @name = updated_name
+    DB.exec("UPDATE stations SET name = '#{@name}' WHERE id = '#{@id}';")
+  end
+
   def save
     results = DB.exec("INSERT INTO stations (name) VALUES ('#{name}') RETURNING id;")
     @id = results.first['id'].to_i

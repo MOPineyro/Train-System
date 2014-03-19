@@ -22,6 +22,15 @@ describe Station do
     end
   end
 
+  describe '#update' do
+    it 'updates the name of a station instance' do
+      test_station = Station.create('Tim Sq')
+      test_station.update("Time Square")
+      test_station.name.should eq "Time Square"
+      Station.all.first.name.should eq "Time Square"
+    end
+  end
+
   describe '#save' do
     it 'saves a station to the class' do
       test_station = Station.create('Time Square')

@@ -18,6 +18,12 @@ class Station
     stations
   end
 
+  def self.create(name)
+    new_station = Station.new({:name => name})
+    new_station.save
+    new_station
+  end
+
   def save
     results = DB.exec("INSERT INTO stations (name) VALUES ('#{name}') RETURNING id;")
     @id = results.first['id'].to_i

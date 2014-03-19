@@ -15,10 +15,16 @@ describe Station do
     end
   end
 
+  describe '.create' do
+    it 'Creates a new Station object' do
+      test_station = Station.create('Brooklyn')
+      test_station.should be_an_instance_of Station
+    end
+  end
+
   describe '#save' do
     it 'saves a station to the class' do
-      test_station = Station.new({:name =>'Time Square'})
-      test_station.save
+      test_station = Station.create('Time Square')
       Station.all.should eq [test_station]
     end
   end

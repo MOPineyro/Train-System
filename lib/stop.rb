@@ -20,6 +20,12 @@ class Stop
     stops
   end
 
+  def self.create(station_id, line_id)
+    new_stop = Stop.new({:station_id => station_id, :line_id => line_id})
+    new_stop.save
+    new_stop
+  end
+
   def save
     result = DB.exec("INSERT INTO lines_stations (station_id, line_id) VALUES ('#{@station_id}', '#{@line_id}') RETURNING id;")
     @id = result.first['id'].to_i

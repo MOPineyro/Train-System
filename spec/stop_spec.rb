@@ -15,10 +15,16 @@ describe Stop do
     end
   end
 
+  describe '.create' do
+    it 'creates a Stop object' do
+      test_stop = Stop.create(1,3)
+      test_stop.should be_an_instance_of Stop
+    end
+  end
+
   describe '#save' do
     it 'saves a stop to the class' do
-      test_stop = Stop.new({:station_id =>5, :line_id => 4})
-      test_stop.save
+      test_stop = Stop.create(4,5)
       Stop.all.should eq [test_stop]
     end
   end

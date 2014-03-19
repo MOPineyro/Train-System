@@ -18,6 +18,12 @@ class Line
     lines
   end
 
+  def self.create(color)
+    new_line = Line.new({:color => color})
+    new_line.save
+    new_line
+  end
+
   def save
     results = DB.exec("INSERT INTO lines (color) VALUES ('#{@color}') RETURNING id;")
     @id = results.first['id'].to_i

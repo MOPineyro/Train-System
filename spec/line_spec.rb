@@ -15,10 +15,16 @@ describe Line do
     end
   end
 
+  describe '.create' do
+    it 'Creates a new Line object' do
+      test_line = Line.create('red')
+      test_line.should be_an_instance_of Line
+    end
+  end
+
   describe '#save' do
     it 'saves a line to the class' do
-      test_line = Line.new({:color =>'blue'})
-      test_line.save
+      test_line = Line.create('blue')
       Line.all.should eq [test_line]
     end
   end

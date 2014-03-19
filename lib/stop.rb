@@ -26,6 +26,10 @@ class Stop
     new_stop
   end
 
+  def delete
+    DB.exec("DELETE FROM lines_stations WHERE id = '#{@id}';")
+  end
+
   def save
     result = DB.exec("INSERT INTO lines_stations (station_id, line_id) VALUES ('#{@station_id}', '#{@line_id}') RETURNING id;")
     @id = result.first['id'].to_i

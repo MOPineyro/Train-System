@@ -22,6 +22,15 @@ describe Stop do
     end
   end
 
+  describe '#delete' do
+    it 'removes a stop from class.all and the database' do
+      test_stop1 = Stop.create(8,5)
+      test_stop2 = Stop.create(5,5)
+      test_stop2.delete
+      Stop.all.should eq [test_stop1]
+    end
+  end
+
   describe '#save' do
     it 'saves a stop to the class' do
       test_stop = Stop.create(4,5)

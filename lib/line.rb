@@ -24,6 +24,11 @@ class Line
     new_line
   end
 
+  def update(updated_color)
+    @color = updated_color
+    DB.exec("UPDATE lines SET color = '#{@color}' WHERE id = '#{@id}';")
+  end
+
   def save
     results = DB.exec("INSERT INTO lines (color) VALUES ('#{@color}') RETURNING id;")
     @id = results.first['id'].to_i

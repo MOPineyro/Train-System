@@ -22,6 +22,15 @@ describe Line do
     end
   end
 
+  describe '#update' do
+    it 'Updates the color of the current instance of Line' do
+      test_line = Line.create('yellow')
+      test_line.update('orange')
+      test_line.color.should eq 'orange'
+      Line.all.first.color.should eq 'orange'
+    end
+  end
+
   describe '#save' do
     it 'saves a line to the class' do
       test_line = Line.create('blue')

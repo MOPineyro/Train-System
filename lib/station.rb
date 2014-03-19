@@ -29,6 +29,10 @@ class Station
     DB.exec("UPDATE stations SET name = '#{@name}' WHERE id = '#{@id}';")
   end
 
+  def delete
+    DB.exec("DELETE FROM stations WHERE id = '#{@id}';")
+  end
+
   def save
     results = DB.exec("INSERT INTO stations (name) VALUES ('#{name}') RETURNING id;")
     @id = results.first['id'].to_i

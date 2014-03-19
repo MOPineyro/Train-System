@@ -31,6 +31,14 @@ describe Station do
     end
   end
 
+  describe '#delete' do
+    it 'removes a station from the class.all and database' do
+      test_station = Station.create('Dyckman')
+      test_station.delete
+      Station.all.first.should eq nil
+    end
+  end
+
   describe '#save' do
     it 'saves a station to the class' do
       test_station = Station.create('Time Square')

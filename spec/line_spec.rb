@@ -31,6 +31,14 @@ describe Line do
     end
   end
 
+  describe '#delete' do
+    it 'removes a line from the class and database' do
+      test_line = Line.create('green')
+      test_line.delete
+      Line.all.should eq []
+    end
+  end
+
   describe '#save' do
     it 'saves a line to the class' do
       test_line = Line.create('blue')

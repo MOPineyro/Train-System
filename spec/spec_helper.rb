@@ -3,6 +3,7 @@ require 'pg'
 require 'line'
 require 'station'
 require 'stop'
+require 'pry'
 
 DB = PG.connect({:dbname => 'train_system_test'})
 

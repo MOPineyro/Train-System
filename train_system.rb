@@ -32,10 +32,15 @@ def rider_menu
   puts "Choose a line or station for more information"
   show_lines
   show_stations
-  gets.chomp
-
+  input = gets.chomp
+  show_stops(input)
   # Stop.all.select {|stop| stop.line_id == input || stop.station_id == input}
   # query the database with the joined table
+  # stops_with_info = DB.exec("SELECT name,station_id,color,line_id FROM lines_stations LEFT OUTER JOIN stations ON stations.id = lines_stations.station_id RIGHT OUTER JOIN lines ON lines.id = lines_stations.line_id;")
+
+  # stops_with_info.each do |stop|
+  #   stop['name']
+  #   stop['station_id']
 end
 
 def add_station
@@ -68,10 +73,14 @@ def add_stop
   station_name = gets.chomp
   puts "Enter the line color of your stop:"
   line_color = gets.chomp
+
   Stop.create(station_name, line_color)
-  #Station.all.select {|station| station.name == station_name}
- #will help if you know what lines and stations are in your system
+  #create a validation for station name and line color
 end
+
+# def show_stops
+
+# end
 
 def menu
   puts '                 _-====-__-======-__-========-_____-============-__'

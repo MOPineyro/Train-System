@@ -18,6 +18,7 @@ describe Station do
   describe '.create' do
     it 'Creates a new Station object' do
       test_station = Station.create('Brooklyn')
+        binding.pry
       test_station.should be_an_instance_of Station
     end
   end

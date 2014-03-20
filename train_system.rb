@@ -21,7 +21,7 @@ def operator_menu
   when 'stop'
     add_stop
   when 'x'
-    main
+    menu
   else
     operator_menu
   end
@@ -34,13 +34,6 @@ def rider_menu
   show_stations
   input = gets.chomp
   show_stops(input)
-  # Stop.all.select {|stop| stop.line_id == input || stop.station_id == input}
-  # query the database with the joined table
-  # stops_with_info = DB.exec("SELECT name,station_id,color,line_id FROM lines_stations LEFT OUTER JOIN stations ON stations.id = lines_stations.station_id RIGHT OUTER JOIN lines ON lines.id = lines_stations.line_id;")
-
-  # stops_with_info.each do |stop|
-  #   stop['name']
-  #   stop['station_id']
 end
 
 def add_station
@@ -50,7 +43,7 @@ def add_station
 end
 
 def show_stations
-  puts "*****STATIONS*****"
+  puts "*****STATIONS*****".green
   Station.all.each {|station| puts station.name}
 end
 
@@ -61,7 +54,7 @@ def add_line
 end
 
 def show_lines
-  puts "******LINES*******"
+  puts "******LINES*******".green
   Line.all.each {|line| puts line.color}
 end
 
@@ -76,6 +69,25 @@ def add_stop
 
   Stop.create(station_name, line_color)
   #create a validation for station name and line color
+end
+
+def show_stops(input)
+  results = DB.exec("SELECT lines_stations.id,name,station_id,color,line_id FROM lines_stations LEFT OUTER JOIN stations ON stations.id = lines_stations.station_id LEFT OUTER JOIN lines ON lines.id = lines_stations.line_id;")
+  stops = []
+  display = []
+  results.each do |result|
+    line_color = result['color']
+    station_name = result['name']
+    if station_name == input
+      display << line_color
+    elsif line_color == input
+      display << station_name
+    end
+  end
+  puts '******************'.cyan
+  puts input.magenta + ": "
+  display.each {|x| puts x}
+  rider_menu
 end
 
 # def show_stops
